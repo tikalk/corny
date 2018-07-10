@@ -33,13 +33,15 @@ const shutdown = () => {
 
 const capture = () => {
 	try {
-		return fs.readFileSync(OUTFILE);
-	} catch (e) {
-		return undefined;
-	} finally {
+		const buffer = fs.readFileSync(OUTFILE);
+
 		try {
 			fs.unlinkSync(OUTFILE);
 		} catch (e) {}
+
+		return buffer;
+	} catch (e) {
+		return undefined;
 	}
 };
 
