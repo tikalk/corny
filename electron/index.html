@@ -1,0 +1,41 @@
+<video autoplay></video>
+<canvas></canvas>
+
+<script>
+	const { nativeImage } = require('electron');
+	const fs = require('fs');
+	const path = require('path');
+
+	const video = document.querySelector('video');
+	const canvas = document.querySelector('canvas');
+	const context = canvas.getContext('2d');
+
+	const outFile = path.resolve(process.env.OUTFILE || path.join(__dirname, 'image.jpg'));
+	const tempFile = outFile + '.temp';
+
+	navigator.mediaDevices.getUserMedia({ video: true }).
+		then(stream => {
+			video.srcObject = stream;
+
+			const loop = async () => {
+				try {
+					canvas.width = video.videoWidth;
+					canvas.height = video.videoHeight;
+					context.drawImage(video, 0, 0);
+
+					const quality = 90;
+
+					const data = canvas.toDataURL('image/jpeg', quality)
+					const img = nativeImage.createFromDataURL(data)
+
+					const buffer = img.toJPEG(quality);
+					fs.writeFileSync(tempFile, buffer);
+					fs.renameSync(tempFile, outFile);
+				} finally {
+					setTimeout(loop, 100);
+				}
+			};
+
+			loop();
+		});
+</script>
