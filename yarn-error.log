@@ -1,0 +1,90 @@
+Arguments: 
+  /home/tikal/.nvm/versions/node/v10.5.0/bin/node /usr/share/yarn/bin/yarn.js ls --depth 0 --json
+
+PATH: 
+  /home/tikal/bin:/home/tikal/.nvm/versions/node/v10.5.0/bin:/home/tikal/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/tikal/projects/lib/git-utils:/home/tikal/bin:/home/tikal/.config/yarn/global/node_modules/.bin
+
+Yarn version: 
+  1.6.0
+
+Node version: 
+  10.5.0
+
+Platform: 
+  linux x64
+
+Trace: 
+  SyntaxError: /home/tikal/projects/fuze/corny/package.json: Unexpected token } in JSON at position 1379
+      at JSON.parse (<anonymous>)
+      at /usr/share/yarn/lib/cli.js:1130:59
+      at Generator.next (<anonymous>)
+      at step (/usr/share/yarn/lib/cli.js:98:30)
+      at /usr/share/yarn/lib/cli.js:109:13
+
+npm manifest: 
+  {
+      "name": "corny",
+      "displayName": "corny",
+      "description": "The Corniest git extension for VSCode - pull and push using action cards",
+      "version": "0.0.1",
+      "publisher": "Tikal",
+      "engines": {
+          "vscode": "^1.24.1"
+      },
+      "categories": [
+          "Other"
+      ],
+      "activationEvents": [
+          "onCommand:extension.sayHello"
+      ],
+      "main": "./extension",
+      "contributes": {
+          "commands": [
+              {
+                  "command": "extension.sayHello",
+                  "title": "Hello World"
+              }
+          ]
+      },
+      "scripts": {
+          "postinstall": "node ./node_modules/vscode/bin/install",
+          "test": "node ./node_modules/vscode/bin/test"
+      },
+      "devDependencies": {
+          "typescript": "^2.6.1",
+          "vscode": "^1.1.6",
+          "eslint": "^4.11.0",
+          "@types/node": "^7.0.43",
+          "@types/mocha": "^2.2.42",
+      "husky": "^0.14.3",
+      "prettier": "^1.13.4",
+      "pretty-quick": "^1.4.1"
+  },
+  "prettier": {
+      "useTabs": true,
+      "tabWidth": 4,
+      "singleQuote": true,
+      "trailingComma": "all",
+      "printWidth": 100,
+      "overrides": [
+          {
+              "files": "*.json",
+              "options": {
+                  "parser": "json"
+              }
+          },
+          {
+              "files": "*.hjs",
+              "options": {
+                  "parser": "html"
+              }
+          }
+      ]
+  },
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
