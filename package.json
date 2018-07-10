@@ -50,6 +50,7 @@
 		"@tensorflow/tfjs": "^0.12.0",
 		"@tensorflow/tfjs-node": "^0.1.7",
 		"electron": "^2.0.4",
+		"lodash.maxby": "^4.6.0",
 		"tree-kill": "^1.2.0"
 	},
 	"devDependencies": {
