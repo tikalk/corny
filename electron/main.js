@@ -7,6 +7,7 @@ app.on('ready', function() {
 		frame: false,
 		resizable: false,
 		alwaysOnTop: false,
+		show: false,
 	});
 
 	mainWindow.loadFile(require.resolve('./index.html'));
