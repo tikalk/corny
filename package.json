@@ -2,15 +2,19 @@
 	"name": "corny",
 	"displayName": "Corny",
 	"description": "The Corniest git extension for VSCode - pull and push using action cards",
-	"icon": "corny.svg",
+	"icon": "corny.png",
 	"version": "0.0.1",
 	"publisher": "Tikal",
 	"engines": {
 		"vscode": "^1.24.1"
 	},
 	"repository": "https://github.com/tikalk/corny",
-	"categories": ["Other"],
-	"activationEvents": ["*"],
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"*"
+	],
 	"main": "./src/extension",
 	"contributes": {
 		"commands": [
@@ -34,8 +38,7 @@
 				"corny.autoshowOutputWindow": {
 					"type": "boolean",
 					"default": true,
-					"description":
-						"Automatically show and hide the output window when running commands"
+					"description": "Automatically show and hide the output window when running commands"
 				}
 			}
 		}
