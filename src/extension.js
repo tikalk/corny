@@ -14,8 +14,8 @@ const register = (context, name, handler) => {
 };
 
 const processWebcam = () => {
-	const buffer = webcam.capture();
-	const command = model(buffer);
+	const src = webcam.capture();
+	const command = model(src);
 	if (command) {
 		vscode.commands.executeCommand(command);
 	}

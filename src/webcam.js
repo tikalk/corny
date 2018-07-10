@@ -31,19 +31,7 @@ const shutdown = () => {
 	}
 };
 
-const capture = () => {
-	try {
-		const buffer = fs.readFileSync(OUTFILE);
-
-		try {
-			fs.unlinkSync(OUTFILE);
-		} catch (e) {}
-
-		return buffer;
-	} catch (e) {
-		return undefined;
-	}
-};
+const capture = () => OUTFILE;
 
 process.on('exit', shutdown);
 
