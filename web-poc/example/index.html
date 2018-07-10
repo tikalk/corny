@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Example</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.2"></script>
+  <script type="module" src="../lib/webcam.js"></script>
+  <script type="module" src="../lib/tf.js"></script>
+</head>
+<body>
+  
+  <script type="module">
+
+      import webcamUtils from '../lib/webcam.js';
+      import LearningModel from '../lib/tf.js';
+
+      let model
+      let canvas
+      let video
+  
+      (async function () {
+
+        const btn0 = document.getElementById('btn0')
+        const btn1 = document.getElementById('btn1')
+        const btn2 = document.getElementById('btn2')
+        const btn3 = document.getElementById('btn3')
+        const btnTrain = document.getElementById('train')
+        const btnStart = document.getElementById('start')
+        const btnSave = document.getElementById('save')
+        const btnLoad = document.getElementById('load')
+
+        video = document.getElementById('webcam')
+        await webcamUtils.init(document.getElementById('webcam'))
+        canvas = webcamUtils.canvas
+        model = new LearningModel(4)
+        await model.initialize()
+
+        document.body.appendChild(webcamUtils.canvas)
+        document.getElementById('status').textContent = 'ready!'
+
+        btn0.onclick =
+        btn1.onclick =
+        btn2.onclick =
+        btn3.onclick = function buttonHandler () {
+          for(let i = 0; i < 500; i++){
+            webcamUtils.capture();
+            const label = parseInt(this.id.slice(3));
+            const imageData = model.captureImageFromCanvas(canvas);
+            model.sample(imageData, label);
+          }
+        }
+
+        const done = (msg) => {
+          console.log(msg);
+        }
+
+        btnTrain.onclick = function () {
+            model.train(done);
+        }
+        btnSave.onclick = function () {
+          model.saveModel(done);
+        }
+        btnLoad.onclick = function () {
+          model.loadModel(done);
+        }
+        btnStart.onclick = function () {
+          detect()
+          this.remove()
+        }
+
+      })()
+
+      let x = 0
+
+      async function detect () {
+        webcamUtils.capture()
+        const imageData = model.captureImageFromCanvas(canvas)
+        const predictions = await model.test(imageData)
+        console.log(predictions)
+        x++
+        detect()
+      }
+    
+    </script>
+
+
+  <video id="webcam" height="360" width="360" autoplay></video>
+
+  <div id="status"></div>
+  <button id="btn0">Sample as item #0</button>
+  <button id="btn1">Sample as item #1</button>
+  <button id="btn2">Sample as item #2</button>
+  <button id="btn3">Sample as item #3</button>
+  <button id="train">Train Model</button>
+  <button id="start">Start detection</button>
+  <button id="save">Save model</button>
+  <button id="load">load existing model</button>
+
+</body>
+</html>
