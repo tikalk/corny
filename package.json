@@ -9,7 +9,7 @@
 	},
 	"categories": ["Other"],
 	"activationEvents": ["onCommand:extension.sayHello"],
-	"main": "./extension",
+	"main": "./src/extension",
 	"contributes": {
 		"commands": [
 			{

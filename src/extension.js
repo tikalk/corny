@@ -10,6 +10,9 @@ module.exports = {
 		register('extension.sayHello', () => {
 			vscode.window.showInformationMessage('Hello World!');
 		});
+		register('extension.gitPull', () => {
+			vscode.window;
+		});
 	},
 
 	deactivate: () => {},
