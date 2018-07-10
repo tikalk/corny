@@ -12,6 +12,8 @@ const getRootDirectory = () => {
 };
 
 const run = (command, ...args) => {
+	const { autoshowOutputWindow } = vscode.workspace.getConfiguration('corny');
+
 	return new Promise(resolve => {
 		if (process) {
 			// Kill any remaining processes from last time
@@ -22,12 +24,21 @@ const run = (command, ...args) => {
 			}
 		}
 
+		if (autoshowOutputWindow) {
+			output.show(true);
+		}
+
 		process = spawn(command, args, { cwd: getRootDirectory() });
 		process.stdout.on('data', print);
 		process.stderr.on('data', print);
 
 		process.on('close', status => {
+			if (autoshowOutputWindow && status === 0) {
+				output.hide();
+			}
+
 			resolve(status);
+
 			process = null;
 		});
 	});
