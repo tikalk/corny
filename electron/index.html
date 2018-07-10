@@ -32,7 +32,7 @@
 					fs.writeFileSync(tempFile, buffer);
 					fs.renameSync(tempFile, outFile);
 				} finally {
-					setTimeout(loop, 0);
+					setTimeout(loop, 100);
 				}
 			};
 
