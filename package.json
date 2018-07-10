@@ -8,20 +8,20 @@
 		"vscode": "^1.24.1"
 	},
 	"categories": ["Other"],
-	"activationEvents": ["onCommand:extension.sayHello"],
+	"activationEvents": ["*"],
 	"main": "./src/extension",
 	"contributes": {
 		"commands": [
 			{
-				"command": "extension.sayHello",
+				"command": "corny.sayHello",
 				"title": "Corny: Hello World"
 			},
 			{
-				"command": "extension.gitPull",
+				"command": "corny.gitPull",
 				"title": "Corny: git pull"
 			},
 			{
-				"command": "extension.gitPush",
+				"command": "corny.gitPush",
 				"title": "Corny: git push"
 			}
 		]

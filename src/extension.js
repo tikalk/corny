@@ -1,6 +1,7 @@
 const vscode = require('vscode');
 
 const exec = require('./exec');
+const throttle = require('./throttle');
 
 const register = (context, name, handler) => {
 	const disposable = vscode.commands.registerCommand(name, handler);
@@ -9,16 +10,18 @@ const register = (context, name, handler) => {
 
 module.exports = {
 	activate: context => {
-		register(context, 'extension.sayHello', () => {
+		console.log('Corny initialized');
+
+		register(context, 'corny.sayHello', () => {
 			vscode.window.showInformationMessage('Hello World!');
 		});
 
-		register(context, 'extension.gitPull', () => {
-			exec('git', 'pull');
+		register(context, 'corny.gitPull', () => {
+			throttle(() => exec('git', 'pull'));
 		});
 
-		register(context, 'extension.gitPsh', () => {
-			exec('git', 'push');
+		register(context, 'corny.gitPush', () => {
+			throttle(() => exec('git', 'push'));
 		});
 	},
 
