@@ -6,6 +6,11 @@ const print = data => output.append(data.toString());
 
 let process;
 
+const getRootDirectory = () => {
+	const { workspaceFolders } = vscode.workspace;
+	return (workspaceFolders && workspaceFolders[0] && workspaceFolders[0].uri.fsPath) || '.';
+};
+
 const run = (command, ...args) => {
 	return new Promise(resolve => {
 		if (process) {
@@ -17,7 +22,7 @@ const run = (command, ...args) => {
 			}
 		}
 
-		process = spawn(command, args);
+		process = spawn(command, args, { cwd: getRootDirectory() });
 		process.stdout.on('data', print);
 		process.stderr.on('data', print);
 
