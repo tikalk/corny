@@ -7,8 +7,12 @@
 	"engines": {
 		"vscode": "^1.24.1"
 	},
-	"categories": ["Other"],
-	"activationEvents": ["*"],
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"*"
+	],
 	"main": "./src/extension",
 	"contributes": {
 		"commands": [
@@ -24,7 +28,18 @@
 				"command": "corny.gitPush",
 				"title": "Corny: git push"
 			}
-		]
+		],
+		"configuration": {
+			"type": "object",
+			"title": "Corny",
+			"properties": {
+				"corny.autoshowOutputWindow": {
+					"type": "boolean",
+					"default": true,
+					"description": "Automatically show and hide the output window when running commands"
+				}
+			}
+		}
 	},
 	"scripts": {
 		"postinstall": "node ./node_modules/vscode/bin/install",
@@ -38,7 +53,7 @@
 		"prettier": "^1.13.4",
 		"pretty-quick": "^1.4.1",
 		"typescript": "^2.6.1",
-		"vscode": "^1.1.6"
+		"vscode": "^1.1.18"
 	},
 	"prettier": {
 		"useTabs": true,
