@@ -1,18 +1,15 @@
 {
 	"name": "corny",
-	"displayName": "corny",
+	"displayName": "Corny",
 	"description": "The Corniest git extension for VSCode - pull and push using action cards",
 	"version": "0.0.1",
 	"publisher": "Tikal",
 	"engines": {
 		"vscode": "^1.24.1"
 	},
-	"categories": [
-		"Other"
-	],
-	"activationEvents": [
-		"*"
-	],
+	"repository": "https://github.com/tikalk/corny",
+	"categories": ["Other"],
+	"activationEvents": ["*"],
 	"main": "./src/extension",
 	"contributes": {
 		"commands": [
@@ -36,7 +33,8 @@
 				"corny.autoshowOutputWindow": {
 					"type": "boolean",
 					"default": true,
-					"description": "Automatically show and hide the output window when running commands"
+					"description":
+						"Automatically show and hide the output window when running commands"
 				}
 			}
 		}
@@ -45,6 +43,7 @@
 		"postinstall": "node ./node_modules/vscode/bin/install",
 		"test": "node ./node_modules/vscode/bin/test"
 	},
+	"dependencies": {},
 	"devDependencies": {
 		"@types/mocha": "^2.2.42",
 		"@types/node": "^7.0.43",
@@ -75,6 +74,5 @@
 				}
 			}
 		]
-	},
-	"dependencies": {}
+	}
 }
