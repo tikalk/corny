@@ -2,6 +2,7 @@ const vscode = require('vscode');
 
 const exec = require('./exec');
 const throttle = require('./throttle');
+const webcam = require('./webcam');
 
 const register = (context, name, handler) => {
 	const disposable = vscode.commands.registerCommand(name, handler);
@@ -23,7 +24,11 @@ module.exports = {
 		register(context, 'corny.gitPush', () => {
 			throttle(() => exec('git', 'push'));
 		});
+
+		webcam.init();
 	},
 
-	deactivate: () => {},
+	deactivate: () => {
+		webcam.shutdown();
+	},
 };

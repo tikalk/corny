@@ -1,0 +1,51 @@
+const { fork } = require('child_process');
+const fs = require('fs');
+const path = require('path');
+const kill = require('tree-kill');
+
+const electronExecutable = path.resolve(__dirname, '../node_modules/.bin/electron');
+const electronCode = path.resolve(__dirname, '../electron/main.js');
+
+const OUTFILE = path.resolve(__dirname, 'temp.jpg');
+
+let subprocess;
+
+const init = () => {
+	if (subprocess) {
+		return;
+	}
+
+	subprocess = fork(electronExecutable, [electronCode], {
+		env: {
+			...process.env,
+			OUTFILE,
+		},
+	});
+};
+
+const shutdown = () => {
+	if (subprocess) {
+		kill(subprocess.pid, 'SIGKILL');
+		subprocess = undefined;
+	}
+};
+
+const capture = () => {
+	try {
+		return fs.readFileSync(OUTFILE);
+	} catch (e) {
+		return undefined;
+	} finally {
+		try {
+			fs.unlinkSync(OUTFILE);
+		} catch (e) {}
+	}
+};
+
+process.on('exit', shutdown);
+
+module.exports = {
+	init,
+	capture,
+	shutdown,
+};
