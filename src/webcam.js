@@ -1,4 +1,4 @@
-const { fork } = require('child_process');
+const { spawn } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 const kill = require('tree-kill');
@@ -15,12 +15,12 @@ const init = () => {
 		return;
 	}
 
-	subprocess = fork(electronExecutable, [electronCode], {
-		env: {
-			...process.env,
+	subprocess = spawn(electronExecutable, [electronCode], {
+		env: Object.assign({}, process.env, {
 			OUTFILE,
-		},
+		}),
 	});
+	console.log(`Spawned electron ${subprocess.pid}`);
 };
 
 const shutdown = () => {
@@ -36,9 +36,10 @@ const capture = () => {
 	} catch (e) {
 		return undefined;
 	} finally {
-		try {
-			fs.unlinkSync(OUTFILE);
-		} catch (e) {}
+		// TODO: Uncomment out, to delete files when we've read them
+		// try {
+		// 	fs.unlinkSync(OUTFILE);
+		// } catch (e) {}
 	}
 };
 

@@ -4,9 +4,17 @@ const exec = require('./exec');
 const throttle = require('./throttle');
 const webcam = require('./webcam');
 
+let interval;
+
 const register = (context, name, handler) => {
 	const disposable = vscode.commands.registerCommand(name, handler);
 	context.subscriptions.push(disposable);
+};
+
+const processWebcam = () => {
+	const buffer = webcam.capture();
+	// console.log(buffer);
+	// TODO
 };
 
 module.exports = {
@@ -26,9 +34,11 @@ module.exports = {
 		});
 
 		webcam.init();
+		interval = setInterval(processWebcam, 500);
 	},
 
 	deactivate: () => {
 		webcam.shutdown();
+		clearInterval(interval);
 	},
 };
