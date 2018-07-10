@@ -33,8 +33,11 @@ module.exports = async (command, ...args) => {
 		return;
 	}
 
+	const fullCommand = `${command} ${args.join(' ')}`;
+	vscode.window.showInformationMessage(fullCommand);
+
 	output.clear();
-	output.appendLine(`$ ${command}`);
+	output.appendLine(`$ ${fullCommand}`);
 
 	const status = await run(command, ...args);
 	output.appendLine(`Command ${command} exited with status code ${status}`);
