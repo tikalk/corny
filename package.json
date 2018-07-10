@@ -14,7 +14,15 @@
 		"commands": [
 			{
 				"command": "extension.sayHello",
-				"title": "Hello World"
+				"title": "Corny: Hello World"
+			},
+			{
+				"command": "extension.gitPull",
+				"title": "Corny: git pull"
+			},
+			{
+				"command": "extension.gitPush",
+				"title": "Corny: git push"
 			}
 		]
 	},
@@ -23,14 +31,14 @@
 		"test": "node ./node_modules/vscode/bin/test"
 	},
 	"devDependencies": {
-		"typescript": "^2.6.1",
-		"vscode": "^1.1.6",
-		"eslint": "^4.11.0",
-		"@types/node": "^7.0.43",
 		"@types/mocha": "^2.2.42",
+		"@types/node": "^7.0.43",
+		"eslint": "^4.11.0",
 		"husky": "^0.14.3",
 		"prettier": "^1.13.4",
-		"pretty-quick": "^1.4.1"
+		"pretty-quick": "^1.4.1",
+		"typescript": "^2.6.1",
+		"vscode": "^1.1.6"
 	},
 	"prettier": {
 		"useTabs": true,
@@ -52,5 +60,6 @@
 				}
 			}
 		]
-	}
+	},
+	"dependencies": {}
 }
